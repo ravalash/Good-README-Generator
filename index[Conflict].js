@@ -75,8 +75,12 @@ inquirer
               if (contributorStandard === false) {
                 const { contributeText } = await inquirer.prompt({
                   name: "contributeText",
-                  message: `Enter details for `
+                  message: `Enter details for other developers to provide contributions. Alternatively, if you do not wish for others to contribute to this porject, you can specify that here\n`
                 })
+                contributor = contributeText;
+              }
+              else {
+
               }
 
             });
