@@ -19,7 +19,9 @@
   "homepage": "https://github.com/ravalash/Good-README-Generator#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "download": "^8.0.0",
     "fs": "0.0.1-security",
+    "http": "0.0.1-security",
     "inquirer": "^7.1.0"
   }
 }
