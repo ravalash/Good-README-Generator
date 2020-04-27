@@ -3,8 +3,6 @@ const axios = require("axios");
 const inquirer = require("inquirer");
 const download = require('download');
 
-
-
 const gatherInfo = async () => {
   const { username } = await inquirer.prompt({
     message: "Enter your GitHub username",
@@ -82,13 +80,11 @@ const gatherInfo = async () => {
     license = currentLicense.name;
   }
   const licenseText = await buildLicense(license, userName);
-  console.log(licenseText);
   const { contributorStandard } = await inquirer.prompt({
     name: "contributorStandard",
     type: "confirm",
     message: `The 'Contributor Convenant' is an industry recccomended standard for guidelines on how to contribute. Would you like to use this?\n`
   })
-  console.log(contributorStandard);
   let contributor = "";
   if (contributorStandard === false) {
     const { contributeText } = await inquirer.prompt({
@@ -107,15 +103,12 @@ const gatherInfo = async () => {
     message: `Enter details for any tests included with your project as well as how to run them:\n`
   })
   const readmeText = `# ${repository}\n![Github Issues](https://img.shields.io/github/issues/${username}/${repository})![Github Forks](https://img.shields.io/github/forks/${username}/${repository})![Github Stars](https://img.shields.io/github/stars/${username}/${repository})![Github Issues](https://img.shields.io/github/license/${username}/${repository})\n\n## Description\n${description}\n\n## Table of Contents\n* [Installation](#installation)\n* [Usage](#usage)\n* [License](#license)\n* [Contributing](#contributing)\n* [Tests](#tests)\n* [Questions](#questions)\n\n## Installation\n1. ${instructions.join("\n1. ")}\n\n## Usage\n${usage}\n\n## License\n${licenseText}\n\n## Contributing\n${contributor}\n\n## Tests\n${tests}\n\n## Questions\nFor questions about this project, please contact me at <${email}>\n![User Avatar](${avatar} "User Avatar")`
-  await fs.writeFile("test.md", readmeText, function (err) {
+  await fs.writeFile("goodREADME.md", readmeText, function (err) {
     if (err) {
       console.log(err);
     }
   });
 }
-
-
-
 
 const buildInstructions = async () => {
   let stop = false;
@@ -127,9 +120,7 @@ const buildInstructions = async () => {
     })
     if (instruction === "") {
       stop = true;
-      return new Promise((resolve) => {
-        resolve(instructionList);
-      })
+      return(instructionList);
     }
     else {
       instructionList.push(instruction);
@@ -152,8 +143,6 @@ const downloadCOC = (async (email) => {
   })
 })
 
-
-
 const buildLicense = (async (license, userName) => {
   if (license === "None") {
     return "No explicit license has been provided for use of this program privately or publicly."
@@ -174,7 +163,5 @@ const buildLicense = (async (license, userName) => {
     return `Copyright (C) ${new Date().getFullYear()} ${userName}\n\nLicense for this project: ${license}`
   }
 })
-
-
 
 gatherInfo();
