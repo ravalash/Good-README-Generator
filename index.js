@@ -52,7 +52,6 @@ const gatherInfo = async () => {
   }
   console.log(`Instructions will be entered line by line. Press ENTER (no input) at any time to end instructions`);
   const instructions = await buildInstructions();
-  console.log(instructions);
   const { usage } = await inquirer.prompt({
     name: "usage",
     message: `Enter details for the 'Usage' section of your Readme file. Usage will be presented as written.\n`
@@ -96,7 +95,7 @@ const gatherInfo = async () => {
   else {
     await downloadCOC(email);
     contributor =
-      `Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.\nAvailable for reference [here](../code_of_conduct.md).`
+      `Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.\nAvailable for reference [here](code_of_conduct.md).`
   }
   const { tests } = await inquirer.prompt({
     name: "tests",
@@ -120,7 +119,7 @@ const buildInstructions = async () => {
     })
     if (instruction === "") {
       stop = true;
-      return(instructionList);
+      return (instructionList);
     }
     else {
       instructionList.push(instruction);
